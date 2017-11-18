@@ -1,0 +1,21 @@
+{
+  "name": "neu",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "angular": "^1.6.6",
+    "body-parser": "*",
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "git-controller": "^1.0.5",
+    "serialport": "^4.0.7",
+    "socket.io": "^2.0.4",
+    "zingchart": "^2.6.1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

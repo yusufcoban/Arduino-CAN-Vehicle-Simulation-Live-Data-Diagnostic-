@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+	<meta charset="utf-8">
+	<title>Temperature Logger</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular.min.js"></script>
+	<script src="socket.io/socket.io.js"></script>
+	<script>
+		var app = angular.module('myApp', []);
+		var socket = io();
+
+		app.controller('appCltr', ['$scope', function($scope){
+
+			socket.on('port', function(port){
+				$scope.$apply(function(){
+				$scope.data = port;
+console.log(port);
+auswerten(port);
+				});
+			});
+			
+		}]);
+		
+	
+			//AUSWERTEN DER RAW DATEN
+
+			function auswerten(input){
+			enginedata[0].value = Integer(parseInt(input.substring(0,1)*10,16);
+			enginedata[1].value = Integer(parseInt(input.substring(3,5),16);
+			enginedata[2].value = Integer(parseInt(input.substring(2,2),16);
+
+			steeringdata[0].value = Integer(parseInt(input.substring(7,9),16);
+			steeringdata[1].value = Integer(parseInt(input.substring(10,10),16);
+			steeringdata[2].value = Integer(parseInt(input.substring(11,11),16);
+
+			exhaustdata[0].value = Integer(parseInt(input.substring(12,14),16);
+			exhaustdata[1].value = Integer(parseInt(input.substring(15,15),16);
+
+
+
+			console.log(enginedata[0].value);
+			console.log(enginedata[1].value);
+			console.log(enginedata[2].value);
+			console.log(steeringdata[0].value);
+			console.log(steeringdata[1].value);
+			console.log(steeringdata[2].value);
+			console.log(exhaustdata[0].value );
+			console.log(exhaustdata[1].value );
+			}
+
+			
+			</script>
+		
+		
+		
+	<style>
+table {
+    border-collapse: collapse;
+    width: 30%;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+tr:nth-child(even){background-color: #F5F5DC}
+</style>
+</head>
+<body>
+
+	<h1>Oven Monitor Demo</h1>
+
+	<div ng-controller="appCltr">
+	
+		<h1>{{data}}</h1>
+	
+	</div>
+	
+</body>
+</html>
+

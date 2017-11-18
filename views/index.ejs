@@ -1,0 +1,83 @@
+<html>
+   <head>
+      <meta charset="utf-8">
+      <!-- Latest compiled and minified CSS -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <!-- jQuery library -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <!-- Latest compiled JavaScript -->
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <title>Project IoT -- CAN Arduino </title>
+   </head>
+   
+   
+   
+   <body>
+	   <!-- Header -->
+      <div class="container">
+         <div class="row">
+            <div class="col-md-12 col-xs-6 bg-info" style="text-align:center">
+               <h1 ><%=title%></h1>
+            </div>
+         </div>
+      </div>
+	  
+	  
+  <!-- Dropdown um Steuergerät auszuwählen -->
+    <div class="dropdown">
+       <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Steuergerätauswahl
+       <span class="caret"></span></button>
+       <ul class="dropdown-menu">
+          <% nodes.forEach(function(nodes) { %>
+          <button id='<%= nodes.id %>'  onclick="window.location.href='http://localhost:3000/<%= nodes.name %>'">
+             <img src= '/icons/<%= nodes.pic %>.png' width="100" height="100" >
+             <li ><a><%= nodes.name %> 
+                >> ID: <%=nodes.id %></a>
+             </li>
+          </button>
+          <% }); %>
+       </ul>
+    </div>
+	  
+	  <!-- Hauptteil der Daten verarbeitet -->
+	 <div class="container" >
+	   <div class="row">
+	     <div class="col-md-12">
+	       <h1><strong> AUSGABEBEREICH</strong></h1>
+	     </div>
+	   </div>
+	   <div class="row">
+	     <div class="col-sm-6" style="height: 300px">
+	       <div class="tile purple">
+	         <h3 class="title">Informationen über das Node</h3>
+	         <p>Allgemeine Informationen.</p>
+	       </div>
+	     </div>
+	     <div class="col-sm-6" style="height: 300px">
+	       <div class="tile red">
+	         <h3 class="title">RawDaten</h3>
+	         <p>Unverarbeitete Daten.</p>
+	       </div>
+	     </div>
+	     
+	   </div>
+	   <div class="row">
+	     <div class="col-sm-6" style="height: 300px">
+	       <div class="tile green">
+	         <h3 class="title">LiveDaten</h3>
+	         <p>Verarbeitete Raw Daten.</p>
+	       </div>
+		   
+	     </div>
+	     <div class="col-sm-6" style="height: 300px">
+	       <div class="tile orange">
+	         <h3 class="title">Diagramm</h3>
+	         <p>Daten im Diagramm anzeigen.</p>
+	       </div>
+	     </div>
+	     
+		 
+	   </div>
+	 </div>
+   </body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+	<meta charset="utf-8">
+	<title>Temperature Logger</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular.min.js"></script>
+	<script src="socket.io/socket.io.js"></script>
+	<script>
+		var app = angular.module('myApp', []);
+		var socket = io();
+
+		app.controller('appCltr', ['$scope', function($scope){
+
+			socket.on('port', function(port){
+				$scope.$apply(function(){
+				$scope.data = port;
+				console.log(port);
+				});
+			});
+			
+		}]);
+		
+	</script>
+	<style>
+table {
+    border-collapse: collapse;
+    width: 30%;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+tr:nth-child(even){background-color: #F5F5DC}
+</style>
+</head>
+<body>
+
+	<h1>Oven Monitor Demo</h1>
+
+	<div ng-controller="appCltr">
+	<table>
+	<tr>
+		<th>Board: </th>
+		<th>Ardunio/Genuino Uno</th>
+	</tr>
+	<tr>
+		<th>Temperature reading (°C): </th>
+		<th>{{data}}</th>
+	</tr>
+	<tr>
+		<th>Humidity reading (g⁄m^3 ): </th>
+		<th></th>
+	</tr>
+	<tr>
+		<th>Baur rate: </th>
+		<th>9600</th>
+	</tr>
+	</table>
+	</div>
+	
+</body>
+</html>
+
