@@ -20,14 +20,6 @@
      
 	 <!-- THERMOMETER JAVASCRIPT-->
 	 <script language="javascript" type="text/javascript" src="/js/thermometer.js"></script>
-	 
-	 <!-- TACHO RPM -->
-	 
-	 <script language="javascript" type="text/javascript" src="/js/rpmtacho.js"></script>
-	 <script language="javascript" type="text/javascript" src="/js/testrpm.js"></script>
-	 
-	 
-	 
 	
       <!-- TESTING SERIAL PORT-->
       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular.min.js"></script>
@@ -39,8 +31,6 @@
       <script>
          var app = angular.module('myApp', ['zingchart-angularjs']);
          var socket = io();
-		 
-		 
          
          app.controller('appCltr', ['$scope',function($scope){
          $scope.myJson = {
@@ -65,9 +55,7 @@
          
          
        		 //ShowClusterRPMData
-			 //update(engine[0].value);
-			 setRPM(engine[0].value);
-			 rpm.style.width="200";
+			 update(engine[0].value);
 			 //ThermometerDATA
 			 set(engine[1].value);
          
@@ -159,7 +147,7 @@
                   <h3 class="title">LiveDaten</h3>
                   <p>Verarbeitete Raw Daten.</p>
                   <p>Für dieses Steuergerät relevante Daten = {{data.substring(0,12)}}</p>
-               </div>
+               </div
             </div>
             <!-- height: auto col-sm-12-->
             <div>
@@ -176,16 +164,13 @@
                </div>
             </div>
          </div>
-		 
          <div class="row">
-            <div class="well col-sm-12" style="height: 50%;z-index:-1;"> 
+            <div class="well col-sm-12" style="height: 80%;z-index:-1;"> 
                <div class="tile green" >
                   <h3 class="title" >Cluster</h3>
                   <div>
-					  
-                     <!-- <span id="speedometerrpm" ></span> -->
-					  <canvas class="col-sm-6" id="rpm" width="200" height="200" data-val="0">No canvas</canvas>
-					    <div class="col-sm-6"  id="ste"  style="width: 100px; height: 150px;">
+                     <span id="speedometerrpm" ></span>
+					    <div id="ste"  style="width: 100px; height: 150px;">
    
 					       <div id="klasse" style="background-color:white; width:100px; height:7px; max-height:129px; position:absolute; 								z-index:-1;"></div>
 					       <div style="background-color:red; z-index:-2; height:57.5%; position:absolute; width:100px; height:150px;">
@@ -193,7 +178,7 @@
 					 	  <div id="temp" style="z-index:2;margin: 130px 22px auto;"> -----</div>
 					 	  </div>
 	   
-					 	  <img src="/js/asd2.png"  alt="enginetemperatur" align="left" hspace="0" vspace="0" style="z-index:2; width:100px; height:150px;">
+					 	  <img src="./asd2.png"  alt="enginetemperatur" align="left" hspace="0" vspace="0" style="z-index:2; width:100px; height:150px;">
 	  
 					 	  </div>
 					    </div>
@@ -205,11 +190,7 @@
       </div>
       </div>
 	  
-	  <!-- <script src="js/speedometer.js"></script>-->
-	  <script language="javascript" type="text/javascript" src="/js/rpmprepare.js"></script>
-	  
-	   
-	   
+	   <script src="js/speedometer.js"></script>
  
    </body>
 </html>

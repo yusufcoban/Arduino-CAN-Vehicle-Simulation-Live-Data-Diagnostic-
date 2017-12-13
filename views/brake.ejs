@@ -60,7 +60,7 @@
 	  
   <!-- Dropdown um Steuergerät auszuwählen -->
     <div class="dropdown">
-       <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Steuergerätauswahl
+       <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"style="margin-left:12%;">Steuergerätauswahl
        <span class="caret"></span></button>
        <ul class="dropdown-menu">
           <% nodes.forEach(function(nodes) { %>
@@ -82,18 +82,18 @@
 	     </div>
 	   </div>
 	   <div class="row">
-	     <div class="col-sm-6" style="height: 300px">
+	     <div class="well col-sm-6" style="height: 300px">
 	       <div class="tile purple">
 	         <h3 class="title">Informationen über das Node</h3>
 	         <p><%=nodes[1].name %> mit der ID= <%=nodes[1].id %></p>
 		   	 <p>  {{brake[0].name}} =  {{brake[0].value}}  in % </p><!--SocketLiveDaten-->
 		   	 <p>  {{brake[1].name}} =  {{brake[1].value}}  </p><!--SocketLiveDaten-->
-			 <p>Bremse aktiv = {{brake.active}}</p>
+			 <p>Bremse aktiv = {{brake[2].value}}</p>
 	       </div>
 	     </div>
-     <div  class="col-sm-6" style="height: 300px">
-       <div class="tile red">
-         <h3 class="title">RawDaten.</h3>
+            <div  class="well col-sm-6" style="height: 300px;word-wrap: break-word;">
+               <div class="tile red">
+                  <h3 class="title">RawDaten.</h3>
          <p>Unverarbeitete Daten.</p>
 		 <p>  {{data}}   </p>
 		 <p> </P>
@@ -104,7 +104,7 @@
      
    </div>
    <div class="row">
-     <div class="col-sm-6" style="height: 300px">
+     <div class="well col-sm-6" style="height: 300px">
        <div class="tile green">
          <h3 class="title">LiveDaten</h3>
          <p>Verarbeitete Raw Daten.</p>
@@ -112,7 +112,7 @@
        </div>
 	   
      </div>
-     <div class="col-sm-6" style="height: 300px">
+     <div class="well col-sm-6" style="height: 300px">
        <div class="tile orange">
          <h3 class="title">Diagramm</h3>
          <p>Daten im Diagramm anzeigen.</p>

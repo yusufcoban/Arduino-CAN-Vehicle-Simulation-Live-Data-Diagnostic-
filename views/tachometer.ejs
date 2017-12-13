@@ -7,10 +7,17 @@
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
       <!-- Latest compiled JavaScript -->
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	  
+	  
+	  <!-- Cluster -->
+	  <script language="javascript" type="text/javascript" src="/js/test.js">></script>
+	  <script language="javascript" type="text/javascript" src="/js/tacho.js">></script>
+	  
       <title>Project IoT -- CAN Arduino </title>
 	  	  <!-- TESTING SERIAL PORT-->
 	  		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular.min.js"></script>
-	  		<script src="socket.io/socket.io.js"></script>
+	  		
+			<script src="socket.io/socket.io.js"></script>
 	  		<script>
 	  			var app = angular.module('myApp', []);
 	  			var socket = io();
@@ -21,6 +28,7 @@
 	  					$scope.$apply(function(){
 	  					$scope.data = port;
 	  					console.log(port);
+						
 	  					});
 	  				});
 				
@@ -28,10 +36,14 @@
 	  					$scope.$apply(function(){
 	  					$scope.tachometer = tachometer;
 	  					console.log(tachometer);
+						set(tachometer[1].value);
 	  					});
 	  				});
 			
 	  			}]);
+				
+				
+				
 	  </script>
 	  
    </head>
@@ -51,7 +63,7 @@
 	  
   <!-- Dropdown um Steuergerät auszuwählen -->
     <div class="dropdown">
-       <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Steuergerätauswahl
+       <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"style="margin-left:12%;">Steuergerätauswahl
        <span class="caret"></span></button>
        <ul class="dropdown-menu">
           <% nodes.forEach(function(nodes) { %>
@@ -73,7 +85,7 @@
 	     </div>
 	   </div>
 	   <div class="row">
-	     <div class="col-sm-6" style="height: 300px">
+	     <div class="well col-sm-6" style="height: 300px">
 	       <div class="tile purple">
 	         <h3 class="title">Informationen über das Node</h3>
 	         <p><%=nodes[4].name %> mit der ID= <%=nodes[4].id %></p>
@@ -82,9 +94,9 @@
 	
 	       </div>
 	     </div>
-		     <div  class="col-sm-6" style="height: 300px">
-		       <div class="tile red">
-		         <h3 class="title">RawDaten.</h3>
+            <div  class="well col-sm-6" style="height: 300px;word-wrap: break-word;">
+               <div class="tile red">
+                  <h3 class="title">RawDaten.</h3>
 		         <p>Unverarbeitete Daten.</p>
 				 <p>  {{data}}   </p>
 				 <p> </P>
@@ -95,7 +107,7 @@
 	     
 		   </div>
 		   <div class="row">
-		     <div class="col-sm-6" style="height: 300px">
+		     <div class="well col-sm-6" style="height: 300px">
 		       <div class="tile green">
 		         <h3 class="title">LiveDaten</h3>
 		         <p>Verarbeitete Raw Daten.</p>
@@ -103,16 +115,36 @@
 		       </div>
 		   
 		     </div>
-		     <div class="col-sm-6" style="height: 300px">
+		     <div class="well col-sm-6" style="height: 300px">
 		       <div class="tile orange">
 		         <h3 class="title">Diagramm</h3>
 		         <p>Daten im Diagramm anzeigen.</p>
+				  <canvas id="demo" width="400" height="400" data-val="0">No canvas</canvas>
 		       </div>
 		     </div>
 	     
 		 
 		   </div>
 		 </div>
+		 
+		 
+		 
+		 
+	     <script>
+	       window.onload = function(){
+	         var demo = document.getElementById('demo');
+	         tacho(demo, {
+	           "title": "km/h", 
+	           "max": 180,
+	           "markInterval": 2,
+	           "bigMarkInterval": 10,
+	           "redLinePoint": 0.85,
+	           "autoScale": false
+	         });
+        
+	       };
+		   demo.style.width="200";
+	     </script>
 	     
    </body>
 </html>

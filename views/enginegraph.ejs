@@ -13,16 +13,27 @@
    <script src="socket.io/socket.io.js"></script>
    <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
    <script src="http://cdn.zingchart.com/angular/zingchart-angularjs.js"></script>
-   <script>
-	   
-	   
-	   
+   
+   
+   <!-- SPEEDOMETER-->
+ 	<link href="css/speedometer.css" rel="stylesheet">
+ 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="js/speedometer.js"></script>
+ 
+   
+    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Play:700,400' type='text/css'>
     
-	   
-	   
-	   
+       <script type="text/javascript" src="http://iop.io/js/vendor/d3.v3.min.js"></script>
+       <script type="text/javascript" src="http://iop.io/js/vendor/polymer/PointerEvents/pointerevents.js"></script>
+       <script type="text/javascript" src="http://iop.io/js/vendor/polymer/PointerGestures/pointergestures.js"></script>
+       <script type="text/javascript" src="http://iop.io/js/iopctrl.js"></script>
+   
+	
+   <script>
+		
       var app = angular.module('myApp', ['zingchart-angularjs']);
       var socket = io();
+	  var rpm;
       
       app.controller('appCltr', ['$scope',function($scope){
       
@@ -37,7 +48,6 @@
 		  };
 	  
 	  
-	  
 	  $scope.graph=[0,10];
 	  
       	socket.on('port', function(port){
@@ -50,6 +60,15 @@
       	socket.on('engine', function(engine){
       		$scope.$apply(function(){
       		$scope.engine = engine;
+			rpm=engine[0].value;
+			
+			
+			//ShowClusterRPm
+            segDisplay.value(rpm/10);
+            gauge.value(rpm/10);
+			
+			
+			
 			graphupdate(engine[0].value,engine[1].value);
       		console.log(engine);
       		});
@@ -60,14 +79,12 @@
 			$scope.myJson.series[1].values.push(tempdata);
 		}
 		
-		
-		
-		
-		
-		
-      
+
       }]);
-   </script>
+	  
+   </script>         
+	  
+	 
 </head>
 <body>
    <!-- Header -->
@@ -103,17 +120,23 @@
    
    
    
+  <div>
+        <span id="speedometerrpm"></span>
+    </div>
+		
+			  
+			  
+			  
+	
    
    
-   <div class="container"  ng-controller="appCltr" ng-app="myApp" >
+   
+   
+     
+   
+ <div class="container"  ng-controller="appCltr" ng-app="myApp" >
 	   
-	   
-	   
-	   
-	   
-	   
-	   
-      <div class="row">
+	         <div class="row">
          <div class="col-md-12">
             <h1><strong> AUSGABEBEREICH</strong></h1>
          </div>
@@ -163,8 +186,26 @@
                </div>
             </div>
          </div>
-      </div>
-   </div>
+		 
+		 
+		 
+        
+		
+		
+		
+		
+         </div>
+		 
+		 
+         
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+   </div> 
    
    
    
@@ -179,9 +220,54 @@
    
    
    
-   
-   
-   
+ 
+ 
+  <script>
+          var svg = d3.select("#speedometerrpm")
+                  .append("svg:svg")
+                  .attr("width", 400)
+                  .attr("height", 400)
+	  .attr('style',  'background-color:#515151');
+
+
+          var gauge = iopctrl.arcslider()
+                  .radius(120)
+                  .events(false)
+                  .indicator(iopctrl.defaultGaugeIndicator);
+          gauge.axis().orient("in")
+                  .normalize(true)
+                  .ticks(12)
+                  .tickSubdivide(3)
+                  .tickSize(10, 8, 10)
+                  .tickPadding(5)
+                  .scale(d3.scale.linear()
+                          .domain([0, 6000])
+                          .range([-3*Math.PI/4, 3*Math.PI/4]));
+
+          var segDisplay = iopctrl.segdisplay()
+                  .width(80)
+                  .digitCount(6)
+                  .negative(false)
+                  .decimals(0);
+
+          svg.append("g")
+                  .attr("class", "segdisplay")
+                  .attr("transform", "translate(130, 200)")
+                  .call(segDisplay);
+
+          svg.append("g")
+                  .attr("class", "gauge")
+                  .call(gauge);
+
+          
+    
+      </script>
+
    
 </body>
+
+
+
+
+ 
 </html>
